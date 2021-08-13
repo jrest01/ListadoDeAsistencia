@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Cofradia.Models.Reuniones>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Nueva Reunion", "Agregar")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Fecha Reunion
+        </th>
+        <th>
+            Tema Reunion
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaReunion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.temaReunion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.idReunion })  |
+            @Html.ActionLink("Details", "Details", new { id = item.idReunion })  |
+            @Html.ActionLink("Delete", "Delete" , new { id = item.idReunion }) 
+        </td>
+    </tr>
+}
+
+</table>

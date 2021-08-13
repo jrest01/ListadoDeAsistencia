@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Cofradia.Models.Cofrade>
+
+@{
+    ViewBag.Title = "Lista de Cofrades";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Agregar")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apodo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sexo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Apodo)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+
+            <td>
+                @{
+                    if (item.Sexo == "M")
+                    {
+                        <span>Masculino</span>
+                    }
+
+                    else
+                    {
+                        <span>Femenino</span>
+                    }
+                }
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Detalles", new { id = item.Id }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.Id }, new { @class = "porEliminar" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(".porEliminar").click(function (event) {
+            if (!confirm('Está seguro de eliminar ?')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+}
